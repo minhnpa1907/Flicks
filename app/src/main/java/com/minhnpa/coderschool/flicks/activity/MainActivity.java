@@ -3,9 +3,12 @@ package com.minhnpa.coderschool.flicks.activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.minhnpa.coderschool.flicks.R;
+import com.minhnpa.coderschool.flicks.adapter.MovieAdapter;
 import com.minhnpa.coderschool.flicks.api.MovieApi;
 import com.minhnpa.coderschool.flicks.model.NowPlaying;
 import com.minhnpa.coderschool.flicks.utils.RetrofitUtils;
@@ -18,6 +21,7 @@ import static android.os.Build.VERSION_CODES.M;
 
 public class MainActivity extends AppCompatActivity {
     private ListView lvMovie;
+    private ProgressBar pbLoadMovie;
     private MovieApi mMovieApi;
 
     @Override
@@ -26,11 +30,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         lvMovie = (ListView) findViewById(R.id.lvMovie);
-        mMovieApi = RetrofitUtils.get().create(MovieApi.class);
+        pbLoadMovie = (ProgressBar) findViewById(R.id.pbLoadMovie);
+        mMovieApi = RetrofitUtils.get(getString(R.string.api_key)).create(MovieApi.class);
         mMovieApi.getNowPlaying().enqueue(new Callback<NowPlaying>() {
             @Override
             public void onResponse(Call<NowPlaying> call, Response<NowPlaying> response) {
-                Log.d("Response", String.valueOf(response.isSuccessful()));
+                handleResponse(response);
             }
 
             @Override
@@ -38,5 +43,10 @@ public class MainActivity extends AppCompatActivity {
                 Log.e("Error", t.getMessage());
             }
         });
+    }
+
+    private void handleResponse(Response<NowPlaying> response) {
+        lvMovie.setAdapter(new MovieAdapter(this, response.body().getMovies()));
+        pbLoadMovie.setVisibility(View.GONE);
     }
 }
