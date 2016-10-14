@@ -9,12 +9,3 @@
 .externalNativeBuild
 .idea/*
 values/secret.xml
-README.md
-app/libs/
-app/src/main/java/com/minhnpa/coderschool/flicks/adapter/
-app/src/main/java/com/minhnpa/coderschool/flicks/api/
-app/src/main/java/com/minhnpa/coderschool/flicks/model/NowPlaying.java
-app/src/main/java/com/minhnpa/coderschool/flicks/utils/
-app/src/main/res/values-land/
-app/src/main/res/values-w820dp/
-app/src/main/res/values/secret.xml
