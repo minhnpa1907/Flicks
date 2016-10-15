@@ -40,6 +40,6 @@ public class Movie {
     }
 
     public int getVoteAverage() {
-        return Integer.parseInt(voteAverage);
+        return (int) Double.parseDouble(voteAverage);
     }
 }
