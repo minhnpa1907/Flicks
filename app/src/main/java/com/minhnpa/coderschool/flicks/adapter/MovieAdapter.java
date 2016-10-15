@@ -20,7 +20,7 @@ public class MovieAdapter extends ArrayAdapter<Movie> {
     private List<Movie> mMovies;
 
     public MovieAdapter(Context context, List<Movie> movies) {
-        super(context, 0, movies);
+        super(context, -1, movies);
         mMovies = movies;
     }
 
@@ -31,21 +31,21 @@ public class MovieAdapter extends ArrayAdapter<Movie> {
 
     @Override
     public int getItemViewType(int position) {
-        return getItem(position).getVoteAverage();
+        return mMovies.get(position).getVoteAverage();
     }
 
     @NonNull
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
         ViewHolder viewHolder;
-        int type = 0;
+        int rate = 0;
 
         if (convertView == null) {
-            type = getItemViewType(position);
-            convertView = getInflatedLayoutForType(type, parent);
+            rate = getItemViewType(position);
+            convertView = getInflatedLayoutForType(rate, parent);
             viewHolder = new ViewHolder();
 
-            if (type < 5) {
+            if (rate < 5) {
                 viewHolder.tvTitle = (TextView) convertView.findViewById(R.id.tvTitle);
                 viewHolder.tvOverView = (TextView) convertView.findViewById(R.id.tvOverView);
             }
@@ -55,7 +55,7 @@ public class MovieAdapter extends ArrayAdapter<Movie> {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        FillData(viewHolder, position, type);
+        FillData(viewHolder, position, rate);
 
         return convertView;
     }
@@ -66,32 +66,49 @@ public class MovieAdapter extends ArrayAdapter<Movie> {
         ImageView imgCover;
     }
 
-    private void FillData(ViewHolder viewHolder, int position, int type) {
+    private void FillData(ViewHolder viewHolder, int position, int rate) {
         Movie movie = getItem(position);
-
-        if (type < 5) {
-            // Fill the data
-            viewHolder.tvTitle.setText(movie.getTitle());
-            viewHolder.tvOverView.setText(movie.getOverview());
-        }
 
         // Get configuration
         Configuration configuration = getContext().getResources().getConfiguration();
-        if (configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
-            Picasso.with(getContext())
-                    .load(movie.getPosterPath())
-                    .placeholder(R.drawable.placeholder_portrait)
-                    .into(viewHolder.imgCover);
-        } else {
-            Picasso.with(getContext())
-                    .load(movie.getBackdropPath())
-                    .placeholder(R.drawable.placeholder_landscape)
-                    .into(viewHolder.imgCover);
+        switch (configuration.orientation) {
+            case Configuration.ORIENTATION_PORTRAIT:
+                // Fill the data
+                if (rate < 5) {
+                    viewHolder.tvTitle.setText(movie.getTitle());
+                    viewHolder.tvOverView.setText(movie.getOverview());
+                    Picasso.with(getContext())
+                            .load(movie.getPosterPath())
+                            .placeholder(R.drawable.placeholder_portrait)
+                            .into(viewHolder.imgCover);
+                } else {
+                    Picasso.with(getContext())
+                            .load(movie.getBackdropPath())
+                            .placeholder(R.drawable.placeholder_landscape)
+                            .into(viewHolder.imgCover);
+                }
+                break;
+            case Configuration.ORIENTATION_LANDSCAPE:
+                // Fill the data
+                viewHolder.tvTitle.setText(movie.getTitle());
+                viewHolder.tvOverView.setText(movie.getOverview());
+                if (rate < 5) {
+                    Picasso.with(getContext())
+                            .load(movie.getPosterPath())
+                            .placeholder(R.drawable.placeholder_portrait)
+                            .into(viewHolder.imgCover);
+                } else {
+                    Picasso.with(getContext())
+                            .load(movie.getBackdropPath())
+                            .placeholder(R.drawable.placeholder_landscape)
+                            .into(viewHolder.imgCover);
+                }
+                break;
         }
     }
 
-    private View getInflatedLayoutForType(int type, ViewGroup parent) {
-        if (type >= 5) {
+    private View getInflatedLayoutForType(int rate, ViewGroup parent) {
+        if (rate >= 5) {
             return LayoutInflater.from(getContext()).inflate(R.layout.item_popmovie_5stars, parent, false);
         } else {
             return LayoutInflater.from(getContext()).inflate(R.layout.item_movie, parent, false);
