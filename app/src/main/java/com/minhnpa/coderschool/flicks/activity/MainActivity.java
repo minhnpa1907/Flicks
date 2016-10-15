@@ -1,10 +1,12 @@
 package com.minhnpa.coderschool.flicks.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -56,6 +58,22 @@ public class MainActivity extends AppCompatActivity {
         } else {
             lvMovie.setAdapter(movieAdapter);
         }
+
+        lvMovie.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(MainActivity.this, DetailsActivity.class);
+                Bundle bundle = new Bundle();
+
+                bundle.putString("title", movieAdapter.getItem(position).getTitle());
+                bundle.putString("release_date", movieAdapter.getItem(position).getReleaseDate());
+                bundle.putInt("rate", movieAdapter.getItem(position).getVoteAverage());
+                bundle.putString("overview", movieAdapter.getItem(position).getOverview());
+
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

@@ -36,7 +36,7 @@ public class MovieAdapter extends ArrayAdapter<Movie> {
 
     @NonNull
     @Override
-    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
+    public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
         int rate = 0;
 

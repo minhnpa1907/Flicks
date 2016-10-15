@@ -8,6 +8,9 @@ import com.minhnpa.coderschool.flicks.utils.Constant;
  */
 
 public class Movie {
+    @SerializedName("id")
+    private long id;
+
     @SerializedName("title")
     private String title;
 
@@ -22,6 +25,13 @@ public class Movie {
 
     @SerializedName("vote_average")
     private String voteAverage;
+
+    @SerializedName("release_date")
+    private String releaseDate;
+
+    public long getId() {
+        return id;
+    }
 
     public String getTitle() {
         return title;
@@ -41,5 +51,9 @@ public class Movie {
 
     public int getVoteAverage() {
         return (int) Double.parseDouble(voteAverage);
+    }
+
+    public String getReleaseDate() {
+        return releaseDate;
     }
 }
