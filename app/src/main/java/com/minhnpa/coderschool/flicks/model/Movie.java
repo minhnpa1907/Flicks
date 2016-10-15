@@ -20,6 +20,9 @@ public class Movie {
     @SerializedName("backdrop_path")
     private String backdropPath;
 
+    @SerializedName("vote_average")
+    private String voteAverage;
+
     public String getTitle() {
         return title;
     }
@@ -34,5 +37,9 @@ public class Movie {
 
     public String getBackdropPath() {
         return Constant.STATIC_BASE_URL + backdropPath;
+    }
+
+    public int getVoteAverage() {
+        return Integer.parseInt(voteAverage);
     }
 }

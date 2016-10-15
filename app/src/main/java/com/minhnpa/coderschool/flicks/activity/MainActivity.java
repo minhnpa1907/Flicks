@@ -29,8 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     // Handling Configuration
     static final String SAVE_ORIENTATION = "save_orientation";
-    private int mSaveInt = 0;
-    private Response<NowPlaying> resp;
+    private int mSaveInt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,16 +54,20 @@ public class MainActivity extends AppCompatActivity {
         if (mSaveInt == 0) {
             fetchMovie();
         } else {
-            mSaveInt = savedInstanceState.getInt(SAVE_ORIENTATION, 0);
-            handleNowPlayingResponse(resp);
+            lvMovie.setAdapter(movieAdapter);
         }
     }
 
     @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
+    protected void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
-        mSaveInt = 9001;
-        savedInstanceState.putInt(SAVE_ORIENTATION, mSaveInt);
+        savedInstanceState.putInt(SAVE_ORIENTATION, 9001);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        mSaveInt = savedInstanceState.getInt(SAVE_ORIENTATION);
     }
 
     private void fetchMovie() {
@@ -72,7 +75,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<NowPlaying> call, Response<NowPlaying> response) {
                 handleNowPlayingResponse(response);
-                resp = response;
             }
 
             @Override
