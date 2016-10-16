@@ -22,7 +22,10 @@
 
         <activity
             android:name=".activity.DetailsActivity"
-            android:theme="@style/DialogNoTitleBar">
-        </activity>
+            android:theme="@style/DialogNoTitleBar" />
+        <activity
+            android:name=".activity.PlayActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 </manifest>

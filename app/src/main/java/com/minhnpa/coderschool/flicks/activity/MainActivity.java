@@ -62,17 +62,27 @@ public class MainActivity extends AppCompatActivity {
         lvMovie.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(MainActivity.this, DetailsActivity.class);
-                Bundle bundle = new Bundle();
+                if (movieAdapter.getItem(position).getVoteAverage() >= 5) {
+                    Intent intent = new Intent(MainActivity.this, PlayActivity.class);
+                    Bundle bundle = new Bundle();
 
-                bundle.putLong("id", movieAdapter.getItem(position).getId());
-                bundle.putString("title", movieAdapter.getItem(position).getTitle());
-                bundle.putString("release_date", movieAdapter.getItem(position).getReleaseDate());
-                bundle.putInt("rate", movieAdapter.getItem(position).getVoteAverage());
-                bundle.putString("overview", movieAdapter.getItem(position).getOverview());
+                    bundle.putLong("id", movieAdapter.getItem(position).getId());
 
-                intent.putExtras(bundle);
-                startActivity(intent);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(MainActivity.this, DetailsActivity.class);
+                    Bundle bundle = new Bundle();
+
+                    bundle.putLong("id", movieAdapter.getItem(position).getId());
+                    bundle.putString("title", movieAdapter.getItem(position).getTitle());
+                    bundle.putString("release_date", movieAdapter.getItem(position).getReleaseDate());
+                    bundle.putInt("rate", movieAdapter.getItem(position).getVoteAverage());
+                    bundle.putString("overview", movieAdapter.getItem(position).getOverview());
+
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
             }
         });
     }

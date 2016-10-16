@@ -1,16 +1,20 @@
 package com.minhnpa.coderschool.flicks.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.minhnpa.coderschool.flicks.R;
+import com.minhnpa.coderschool.flicks.activity.PlayActivity;
 import com.minhnpa.coderschool.flicks.model.Movie;
 import com.squareup.picasso.Picasso;
 
@@ -50,6 +54,7 @@ public class MovieAdapter extends ArrayAdapter<Movie> {
             viewHolder.tvTitle = (TextView) convertView.findViewById(R.id.tvTitle);
             viewHolder.tvOverview = (TextView) convertView.findViewById(R.id.tvOverview);
             viewHolder.imgCover = (ImageView) convertView.findViewById(R.id.imgCover);
+            viewHolder.btnPlay = (ImageButton) convertView.findViewById(R.id.btnPlay);
 
             convertView.setTag(viewHolder);
         } else {
@@ -64,10 +69,11 @@ public class MovieAdapter extends ArrayAdapter<Movie> {
         TextView tvTitle;
         TextView tvOverview;
         ImageView imgCover;
+        ImageButton btnPlay;
     }
 
     private void FillData(ViewHolder viewHolder, int position, int rate) {
-        Movie movie = getItem(position);
+        final Movie movie = getItem(position);
 
         if (null != movie) {
             // Get configuration
@@ -76,6 +82,18 @@ public class MovieAdapter extends ArrayAdapter<Movie> {
                 case Configuration.ORIENTATION_PORTRAIT:
                     // Fill the data
                     if (rate >= 5) {
+                        viewHolder.btnPlay.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent(getContext(), PlayActivity.class);
+                                Bundle bundle = new Bundle();
+
+                                bundle.putLong("id", movie.getId());
+
+                                intent.putExtras(bundle);
+                                getContext().startActivity(intent);
+                            }
+                        });
                         Picasso.with(getContext())
                                 .load(movie.getBackdropPath())
                                 .transform(new RoundedCornersTransformation(10, 10))

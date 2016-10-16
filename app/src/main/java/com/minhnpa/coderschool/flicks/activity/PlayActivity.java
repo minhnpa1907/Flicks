@@ -1,8 +1,6 @@
 package com.minhnpa.coderschool.flicks.activity;
 
 import android.os.Bundle;
-import android.widget.RatingBar;
-import android.widget.TextView;
 
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
@@ -20,29 +18,16 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DetailsActivity extends YouTubeBaseActivity {
-    private TextView tvTitleDetails;
-    private TextView tvReleaseDateDetails;
-    private RatingBar rbRateDetails;
-    private TextView tvOverViewDetails;
+public class PlayActivity extends YouTubeBaseActivity {
     private MovieApi mMovieApi;
     private long id;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_details);
-
-        tvTitleDetails = (TextView) findViewById(R.id.tvTitleDetails);
-        tvReleaseDateDetails = (TextView) findViewById(R.id.tvReleaseDateDetails);
-        rbRateDetails = (RatingBar) findViewById(R.id.rbRateDetails);
-        tvOverViewDetails = (TextView) findViewById(R.id.tvOverViewDetails);
+        setContentView(R.layout.activity_play);
 
         id = getIntent().getLongExtra("id", 0);
-        tvTitleDetails.setText(getIntent().getStringExtra("title"));
-        tvReleaseDateDetails.setText("Release Date: " + getIntent().getStringExtra("release_date"));
-        rbRateDetails.setRating(getIntent().getIntExtra("rate", 0));
-        tvOverViewDetails.setText(getIntent().getStringExtra("overview"));
         mMovieApi = RetrofitUtils.get(getString(R.string.api_key)).create(MovieApi.class);
 
         fetchTrailer();
@@ -72,7 +57,7 @@ public class DetailsActivity extends YouTubeBaseActivity {
                     public void onInitializationSuccess(YouTubePlayer.Provider provider,
                                                         YouTubePlayer youTubePlayer, boolean b) {
 
-                        youTubePlayer.cueVideo(listYoutube.get(0).getSource());
+                        youTubePlayer.loadVideo(listYoutube.get(0).getSource());
                     }
 
                     @Override
