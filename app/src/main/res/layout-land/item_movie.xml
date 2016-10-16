@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
+    android:paddingBottom="@dimen/txt_margin_small"
     tools:background="@color/colorPrimary">
 
     <RelativeLayout
@@ -30,6 +31,7 @@
             android:id="@+id/tvTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/txt_margin_small"
             android:gravity="center"
             android:textColor="@android:color/white"
             android:textSize="@dimen/txt_size_medium"
@@ -40,6 +42,7 @@
             android:id="@+id/tvOverview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/txt_margin_small"
             android:textColor="@android:color/white"
             android:textSize="@dimen/txt_size_small"
             tools:text="Nguyen Pham Anh MinhNguyen Pham Anh MinhNguyen Pham Anh MinhNguyen Pham Anh MinhNguyen Pham Anh MinhNguyen Pham AnhNguyen Pham Anh Minh Minh" />

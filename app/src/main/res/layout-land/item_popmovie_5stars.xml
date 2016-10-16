@@ -4,18 +4,19 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
+    android:paddingBottom="@dimen/txt_margin_small"
     tools:background="@color/colorPrimary">
 
     <RelativeLayout
         android:layout_width="0dp"
-        android:layout_height="@dimen/cover_height"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_weight="1">
 
         <ImageView
             android:id="@+id/imgCover"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="167dp"
             tools:src="@drawable/backdrop" />
 
         <ImageButton

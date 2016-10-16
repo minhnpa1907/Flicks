@@ -40,7 +40,7 @@ public class DetailsActivity extends YouTubeBaseActivity {
 
         id = getIntent().getLongExtra("id", 0);
         tvTitleDetails.setText(getIntent().getStringExtra("title"));
-        tvReleaseDateDetails.setText(getIntent().getStringExtra("release_date"));
+        tvReleaseDateDetails.setText("Release Date: " + getIntent().getStringExtra("release_date"));
         rbRateDetails.setRating(getIntent().getIntExtra("rate", 0));
         tvOverViewDetails.setText(getIntent().getStringExtra("overview"));
         mMovieApi = RetrofitUtils.get(getString(R.string.api_key)).create(MovieApi.class);

@@ -16,6 +16,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
+
 public class MovieAdapter extends ArrayAdapter<Movie> {
     private List<Movie> mMovies;
 
@@ -67,41 +69,47 @@ public class MovieAdapter extends ArrayAdapter<Movie> {
     private void FillData(ViewHolder viewHolder, int position, int rate) {
         Movie movie = getItem(position);
 
-        // Get configuration
-        Configuration configuration = getContext().getResources().getConfiguration();
-        switch (configuration.orientation) {
-            case Configuration.ORIENTATION_PORTRAIT:
-                // Fill the data
-                if (rate >= 5) {
-                    Picasso.with(getContext())
-                            .load(movie.getBackdropPath())
-                            .placeholder(R.drawable.placeholder_landscape)
-                            .into(viewHolder.imgCover);
-                } else {
+        if (null != movie) {
+            // Get configuration
+            Configuration configuration = getContext().getResources().getConfiguration();
+            switch (configuration.orientation) {
+                case Configuration.ORIENTATION_PORTRAIT:
+                    // Fill the data
+                    if (rate >= 5) {
+                        Picasso.with(getContext())
+                                .load(movie.getBackdropPath())
+                                .transform(new RoundedCornersTransformation(10, 10))
+                                .placeholder(R.drawable.placeholder_landscape)
+                                .into(viewHolder.imgCover);
+                    } else {
+                        viewHolder.tvTitle.setText(movie.getTitle());
+                        viewHolder.tvOverview.setText(movie.getOverview());
+                        Picasso.with(getContext())
+                                .load(movie.getPosterPath())
+                                .transform(new RoundedCornersTransformation(10, 10))
+                                .placeholder(R.drawable.placeholder_portrait)
+                                .into(viewHolder.imgCover);
+                    }
+                    break;
+                case Configuration.ORIENTATION_LANDSCAPE:
+                    // Fill the data
                     viewHolder.tvTitle.setText(movie.getTitle());
                     viewHolder.tvOverview.setText(movie.getOverview());
-                    Picasso.with(getContext())
-                            .load(movie.getPosterPath())
-                            .placeholder(R.drawable.placeholder_portrait)
-                            .into(viewHolder.imgCover);
-                }
-                break;
-            case Configuration.ORIENTATION_LANDSCAPE:
-                // Fill the data
-                viewHolder.tvTitle.setText(movie.getTitle());
-                viewHolder.tvOverview.setText(movie.getOverview());
-                if (rate >= 5) {
-                    Picasso.with(getContext())
-                            .load(movie.getBackdropPath())
-                            .placeholder(R.drawable.placeholder_landscape)
-                            .into(viewHolder.imgCover);
-                } else {
-                    Picasso.with(getContext())
-                            .load(movie.getPosterPath())
-                            .placeholder(R.drawable.placeholder_landscape)
-                            .into(viewHolder.imgCover);
-                }
-                break;
+                    if (rate >= 5) {
+                        Picasso.with(getContext())
+                                .load(movie.getBackdropPath())
+                                .transform(new RoundedCornersTransformation(10, 10))
+                                .placeholder(R.drawable.placeholder_landscape)
+                                .into(viewHolder.imgCover);
+                    } else {
+                        Picasso.with(getContext())
+                                .load(movie.getPosterPath())
+                                .transform(new RoundedCornersTransformation(10, 10))
+                                .placeholder(R.drawable.placeholder_landscape)
+                                .into(viewHolder.imgCover);
+                    }
+                    break;
+            }
         }
     }
 

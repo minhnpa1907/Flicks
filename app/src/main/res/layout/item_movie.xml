@@ -10,7 +10,6 @@
         android:id="@+id/imgCover"
         android:layout_width="0dp"
         android:layout_height="@dimen/cover_height"
-        android:layout_gravity="center_vertical"
         android:layout_weight="0.7"
         android:scaleType="fitStart"
         tools:src="@drawable/poster" />
@@ -25,6 +24,7 @@
             android:id="@+id/tvTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/txt_margin_small"
             android:textColor="@android:color/white"
             android:textSize="@dimen/txt_size_medium"
             android:textStyle="bold"
@@ -34,6 +34,7 @@
             android:id="@+id/tvOverview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/txt_margin_small"
             android:textColor="@android:color/white"
             android:textSize="@dimen/txt_size_small"
             tools:text="Nguyen Pham Anh MinhNguyen Pham Anh MinhNguyen Pham Anh MinhNguyen Pham Anh MinhNguyen Pham Anh MinhNguyen Pham AnhNguyen Pham Anh Minh Minh" />
