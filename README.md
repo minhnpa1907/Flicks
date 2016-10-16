@@ -49,6 +49,7 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 ## Notes
 
 Can't savedInstanceState, everytime I rotate the screen, the app will load data from server again
+I can't solve the problem when scrolling the ListView
 
 ## Open-source libraries used
 
