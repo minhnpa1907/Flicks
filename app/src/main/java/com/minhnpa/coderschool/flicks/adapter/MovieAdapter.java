@@ -42,13 +42,11 @@ public class MovieAdapter extends ArrayAdapter<Movie> {
 
         if (convertView == null) {
             rate = getItemViewType(position);
-            convertView = getInflatedLayoutForType(rate, parent);
+            convertView = getInflatedLayoutForType(rate);
             viewHolder = new ViewHolder();
 
-            if (rate < 5) {
-                viewHolder.tvTitle = (TextView) convertView.findViewById(R.id.tvTitle);
-                viewHolder.tvOverView = (TextView) convertView.findViewById(R.id.tvOverView);
-            }
+            viewHolder.tvTitle = (TextView) convertView.findViewById(R.id.tvTitle);
+            viewHolder.tvOverview = (TextView) convertView.findViewById(R.id.tvOverview);
             viewHolder.imgCover = (ImageView) convertView.findViewById(R.id.imgCover);
 
             convertView.setTag(viewHolder);
@@ -62,7 +60,7 @@ public class MovieAdapter extends ArrayAdapter<Movie> {
 
     private class ViewHolder {
         TextView tvTitle;
-        TextView tvOverView;
+        TextView tvOverview;
         ImageView imgCover;
     }
 
@@ -74,32 +72,32 @@ public class MovieAdapter extends ArrayAdapter<Movie> {
         switch (configuration.orientation) {
             case Configuration.ORIENTATION_PORTRAIT:
                 // Fill the data
-                if (rate < 5) {
-                    viewHolder.tvTitle.setText(movie.getTitle());
-                    viewHolder.tvOverView.setText(movie.getOverview());
-                    Picasso.with(getContext())
-                            .load(movie.getPosterPath())
-                            .placeholder(R.drawable.placeholder_portrait)
-                            .into(viewHolder.imgCover);
-                } else {
+                if (rate >= 5) {
                     Picasso.with(getContext())
                             .load(movie.getBackdropPath())
                             .placeholder(R.drawable.placeholder_landscape)
+                            .into(viewHolder.imgCover);
+                } else {
+                    viewHolder.tvTitle.setText(movie.getTitle());
+                    viewHolder.tvOverview.setText(movie.getOverview());
+                    Picasso.with(getContext())
+                            .load(movie.getPosterPath())
+                            .placeholder(R.drawable.placeholder_portrait)
                             .into(viewHolder.imgCover);
                 }
                 break;
             case Configuration.ORIENTATION_LANDSCAPE:
                 // Fill the data
                 viewHolder.tvTitle.setText(movie.getTitle());
-                viewHolder.tvOverView.setText(movie.getOverview());
-                if (rate < 5) {
+                viewHolder.tvOverview.setText(movie.getOverview());
+                if (rate >= 5) {
                     Picasso.with(getContext())
-                            .load(movie.getPosterPath())
-                            .placeholder(R.drawable.placeholder_portrait)
+                            .load(movie.getBackdropPath())
+                            .placeholder(R.drawable.placeholder_landscape)
                             .into(viewHolder.imgCover);
                 } else {
                     Picasso.with(getContext())
-                            .load(movie.getBackdropPath())
+                            .load(movie.getPosterPath())
                             .placeholder(R.drawable.placeholder_landscape)
                             .into(viewHolder.imgCover);
                 }
@@ -107,11 +105,11 @@ public class MovieAdapter extends ArrayAdapter<Movie> {
         }
     }
 
-    private View getInflatedLayoutForType(int rate, ViewGroup parent) {
+    private View getInflatedLayoutForType(int rate) {
         if (rate >= 5) {
-            return LayoutInflater.from(getContext()).inflate(R.layout.item_popmovie_5stars, parent, false);
+            return LayoutInflater.from(getContext()).inflate(R.layout.item_popmovie_5stars, null);
         } else {
-            return LayoutInflater.from(getContext()).inflate(R.layout.item_movie, parent, false);
+            return LayoutInflater.from(getContext()).inflate(R.layout.item_movie, null);
         }
     }
 }

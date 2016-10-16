@@ -37,7 +37,7 @@
             tools:text="Nguyen Pham Anh Minh" />
 
         <TextView
-            android:id="@+id/tvOverView"
+            android:id="@+id/tvOverview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"

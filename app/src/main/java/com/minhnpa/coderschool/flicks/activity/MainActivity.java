@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, DetailsActivity.class);
                 Bundle bundle = new Bundle();
 
+                bundle.putLong("id", movieAdapter.getItem(position).getId());
                 bundle.putString("title", movieAdapter.getItem(position).getTitle());
                 bundle.putString("release_date", movieAdapter.getItem(position).getReleaseDate());
                 bundle.putInt("rate", movieAdapter.getItem(position).getVoteAverage());

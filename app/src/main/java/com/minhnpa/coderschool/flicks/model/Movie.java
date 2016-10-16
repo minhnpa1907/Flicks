@@ -3,10 +3,6 @@ package com.minhnpa.coderschool.flicks.model;
 import com.google.gson.annotations.SerializedName;
 import com.minhnpa.coderschool.flicks.utils.Constant;
 
-/**
- * Created by MINH NPA on 14 Oct 2016.
- */
-
 public class Movie {
     @SerializedName("id")
     private long id;
