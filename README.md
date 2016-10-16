@@ -2,7 +2,7 @@
 
 **Flicks** shows the latest movies currently playing in theaters. The app utilizes the Movie Database API to display images and basic information about these movies to the user.
 
-Time spent: **X** hours spent in total
+Time spent: **44** hours spent in total
 
 ## User Stories
 
@@ -34,28 +34,31 @@ The following **bonus** features are implemented:
 
 The following **additional** features are implemented:
 
-* [ ] List anything else that you can get done to improve the app functionality!
+* [x] Remove scrollbars and divider for better view
+* [x] Add ProgressBar when loading data
 
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://i.imgur.com/uxYke9q.gifv' title='Video Walkthrough1' width='' alt='Video Walkthrough1' />
+<img src='http://i.imgur.com/uxYke9q.gifv' title='Video Walkthrough2' width='' alt='Video Walkthrough2' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+Can't savedInstanceState, everytime I rotate the screen, the app will load data from server again
+I can't solve the problem when scrolling the ListView
 
 ## Open-source libraries used
 
-- [Android Async HTTP](https://github.com/loopj/android-async-http) - Simple asynchronous HTTP requests with JSON parsing
+- [OkHttp](http://guides.codepath.com/android/Using-OkHttp)
 - [Picasso](http://square.github.io/picasso/) - Image loading and caching library for Android
 
 ## License
 
-    Copyright [yyyy] [name of copyright owner]
+    Copyright [2016] [MINH NGUYEN]
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.

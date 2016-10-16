@@ -21,6 +21,7 @@
             tools:src="@drawable/backdrop" />
 
         <ImageButton
+            android:id="@+id/btnPlay"
             android:layout_width="@dimen/btn_play_size"
             android:layout_height="@dimen/btn_play_size"
             android:layout_centerInParent="true"

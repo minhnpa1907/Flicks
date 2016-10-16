@@ -114,6 +114,18 @@ public class MovieAdapter extends ArrayAdapter<Movie> {
                     viewHolder.tvTitle.setText(movie.getTitle());
                     viewHolder.tvOverview.setText(movie.getOverview());
                     if (rate >= 5) {
+                        viewHolder.btnPlay.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent(getContext(), PlayActivity.class);
+                                Bundle bundle = new Bundle();
+
+                                bundle.putLong("id", movie.getId());
+
+                                intent.putExtras(bundle);
+                                getContext().startActivity(intent);
+                            }
+                        });
                         Picasso.with(getContext())
                                 .load(movie.getBackdropPath())
                                 .transform(new RoundedCornersTransformation(10, 10))
